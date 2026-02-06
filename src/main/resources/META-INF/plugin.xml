@@ -1,0 +1,41 @@
+<!-- Plugin Configuration File: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN, cannot be changed between the plugin versions. -->
+    <id>de.buschmann.nextflow-lsp</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-name -->
+    <name>Nextflow LSP</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor>Lukas</vendor>
+
+    <version>0.1</version>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/best-practices-for-listing.html#plugin-description -->
+    <description><![CDATA[
+        Unofficial community plugin that adds lightweight Nextflow LSP support by connecting your IDE to the Nextflow Language Server JAR.<br>
+        Configure the server JAR path in <b>Settings | Tools | Nextflow LSP</b>.<br>
+        Download the server JAR from the Nextflow Language Server releases page:<br>
+        https://github.com/nextflow-io/language-server/releases
+    ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends optional="true" config-file="lsp.xml">com.intellij.modules.lsp</depends>
+    <!-- Extensions defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType
+                name="Nextflow"
+                language="Nextflow"
+                implementationClass="de.buschmann.nextflowlsp.NextflowFileType"
+                extensions="nf"/>
+        <applicationConfigurable
+                id="nextflow.lsp.settings"
+                displayName="Nextflow LSP"
+                groupId="tools"
+                instance="de.buschmann.nextflowlsp.NextflowLspSettingsConfigurable"/>
+    </extensions>
+</idea-plugin>
